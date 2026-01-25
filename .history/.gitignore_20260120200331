@@ -23,8 +23,6 @@
 # misc
 .DS_Store
 *.pem
-mlb-player-comparison-plan.md
-plan.txt
 
 # debug
 npm-debug.log*
@@ -41,4 +39,3 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
-

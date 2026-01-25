@@ -24,7 +24,6 @@
 .DS_Store
 *.pem
 mlb-player-comparison-plan.md
-plan.txt
 
 # debug
 npm-debug.log*
