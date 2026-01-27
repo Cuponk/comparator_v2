@@ -1,0 +1,213 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
+// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
+
+generator client {
+  provider = "prisma-client"
+  output   = "../app/generated/prisma"
+}
+
+datasource db {
+  provider = "sqlite"
+}
+
+model player {
+  id        Int      @id
+  full_name String
+  first_name String
+  last_name  String
+  position   String
+  position_category String
+  batting_hand String
+  throwing_hand String
+  height     String
+  height_inches Int
+  weight     Int
+  birth_date DateTime
+  birth_city String
+  birth_state String
+  birth_country String
+  debut_date DateTime
+  final_game_date DateTime?
+  active     Boolean
+  created_at DateTime @default(now())
+  updated_at DateTime @updatedAt
+  awards    awards[]
+  batting_stats batting_stats[]
+  pitching_stats pitching_stats[]
+  batting_game_logs batting_game_logs[]
+  pitching_game_logs pitching_game_logs[]
+}
+
+model team {
+  id           Int      @id
+  name         String
+  abbreviation String
+  league       String
+  division     String
+  created_at   DateTime @default(now())
+  updated_at   DateTime @updatedAt
+}
+model awards {
+  id         Int      @id
+  player_id  Int
+  award_type String
+  season     Int
+  league     String?
+  team_id    Int?
+  team_name  String?
+  player     player   @relation(fields: [player_id], references: [id])
+  @@index([player_id])
+}
+
+model batting_stats {
+  id                     Int      @id
+  player_id              Int
+  stat_type              statType? @default(CAREER)
+  season                 Int?
+  team_id                Int?
+  team_name              String?
+  games                  Int
+  plate_appearances      Int
+  at_bats                Int
+  runs                   Int
+  hits                   Int
+  doubles                Int
+  triples                Int
+  home_runs              Int
+  rbi                    Int
+  stolen_bases           Int
+  caught_stealing        Int
+  walks                  Int
+  strikeouts             Int
+  hit_by_pitch           Int
+  sacrifice_flies        Int
+  sacrifice_bunts        Int
+  ground_into_dp         Int
+  batting_average        Float
+  on_base_percentage     Float
+  slugging_percentage    Float
+  ops                    Float
+  war                    Float
+  wpa                    Float
+  woba                   Float
+  wrc_plus               Int
+  iso                    Float
+  babip                  Float
+  player player  @relation(fields: [player_id], references: [id])
+  @@index([player_id, season, team_id])
+}
+
+model pitching_stats {
+  id                     Int      @id
+  player_id              Int
+  stat_type              statType? @default(CAREER)
+  season                 Int?
+  team_id                Int?
+  team_name              String?
+  wins                   Int
+  losses                 Int
+  era                    Float
+  games                  Int
+  games_started          Int
+  games_finished         Int
+  complete_games         Int
+  shutouts               Int
+  saves                  Int
+  save_opportunities     Int
+  holds                  Int
+  innings_pitched        Float
+  hits                   Int
+  runs                   Int
+  earned_runs            Int
+  home_runs              Int
+  walks                  Int
+  intentional_walks      Int
+  strikeouts             Int
+  hit_batters            Int
+  wild_pitches           Int
+  balks                  Int
+  whip                   Float
+  batting_avg_against    Float
+  war                    Float
+  fip                    Float
+  xfip                   Float
+  era_plus               Int
+  siera                  Float
+  k_percentage           Float
+  bb_percentage          Float
+  k_bb_ratio             Float
+  hr_per_9               Float
+  k_per_9                Float
+  bb_per_9               Float
+  gb_percentage          Float
+  fb_percentage          Float
+  player player  @relation(fields: [player_id], references: [id])
+  @@index([player_id, season, team_id])
+}
+
+model batting_game_logs {
+  id                     Int      @id
+  player_id              Int
+  season                 Int
+  game_id                String
+  game_date              DateTime
+  opponent_team_id       Int
+  opponent_team_name     String
+  is_home                Boolean
+  game_result            String
+  batting_order          Int
+  position_played        String
+  at_bats                Int
+  runs                   Int
+  hits                   Int
+  doubles                Int
+  triples                Int
+  home_runs              Int
+  rbi                    Int
+  walks                  Int
+  strikeouts             Int
+  stolen_bases           Int
+  caught_stealing        Int
+  hit_by_pitch           Int
+  sacrifice_flies        Int
+  avg_season_to_date     Float
+  ops_season_to_date     Float
+  player player  @relation(fields: [player_id], references: [id])
+  @@index([player_id, season, game_date])
+}
+
+model pitching_game_logs {
+  id                     Int      @id
+  player_id              Int
+  season                 Int
+  game_id                String
+  game_date              DateTime
+  opponent_team_id       Int
+  opponent_team_name     String
+  is_home                Boolean
+  game_result            String
+  decision               String?
+  is_start               Boolean
+  innings_pitched       Float
+  hits                   Int
+  runs                   Int
+  earned_runs            Int
+  walks                  Int
+  strikeouts             Int
+  home_runs              Int
+  pitches_thrown         Int
+  strikes                Int
+  balls                  Int
+  era_season_to_date     Float
+  player player  @relation(fields: [player_id], references: [id])
+  @@index([player_id, season, game_date])
+}
+
+enum statType {
+  CAREER
+  SEASON
+  
+}
