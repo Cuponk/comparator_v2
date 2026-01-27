@@ -33,3 +33,5 @@ export const fetchOhtani = async () => {
     const ohtaniId = 660271;
     return await fetchPlayer(ohtaniId);
 }
+
+await console.log(fetchPlayer(592450));

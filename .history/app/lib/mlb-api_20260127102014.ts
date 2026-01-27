@@ -12,8 +12,7 @@ export async function fetchPlayer(playerId: number) {
             throw new Error('Response code:' + response.status);
         }
         const result = await response.json();
-        const formatted = result.people[0];
-        return formatted;
+        return result;
     } catch (error) {
         if (error instanceof Error) {
             console.error(error.message);
@@ -33,3 +32,5 @@ export const fetchOhtani = async () => {
     const ohtaniId = 660271;
     return await fetchPlayer(ohtaniId);
 }
+
+console.log(fetchJudge());
