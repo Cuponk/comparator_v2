@@ -12,7 +12,8 @@ export async function fetchPlayers() {
             throw new Error('Response code:' + response.status);
         }
         const result = await response.json();
-        return result;
+        console.log(result);
+        return result
     } catch (error) {
         console.error(error.message);
         throw error;

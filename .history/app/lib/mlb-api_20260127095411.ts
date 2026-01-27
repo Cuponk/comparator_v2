@@ -1,5 +1,5 @@
 import "dotenv/config";
-// import { PrismaClient } from "../generated/prisma/client";
+import { PrismaClient } from "../generated/prisma/client";
 
 const baseUrl = process.env.MLB_URL;
 
@@ -12,10 +12,12 @@ export async function fetchPlayers() {
             throw new Error('Response code:' + response.status);
         }
         const result = await response.json();
-        return result;
+        console.log(result);
+        return result
     } catch (error) {
         console.error(error.message);
         throw error;
     }
 }
 
+await fetchPlayers();
