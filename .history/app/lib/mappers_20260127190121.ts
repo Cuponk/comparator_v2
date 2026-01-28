@@ -1,5 +1,5 @@
 import { fetchPlayer } from "./mlb-api";
-import { PrismaClient } from "../generated/prisma/client";
+import { PrismaClient } from "../generated/prisma";
 
 interface rawPlayerData {
     id: number;

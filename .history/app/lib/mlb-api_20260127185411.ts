@@ -1,4 +1,5 @@
 import "dotenv/config";
+import { PrismaClient } from "../generated/prisma"
 
 const baseUrl = process.env.MLB_URL;
 

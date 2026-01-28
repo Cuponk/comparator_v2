@@ -1,5 +1,5 @@
 import { fetchPlayer } from "./mlb-api";
-import { PrismaClient } from "../generated/prisma/client";
+import { PrismaClient } from "../generated/prisma";
 
 interface rawPlayerData {
     id: number;
@@ -63,7 +63,7 @@ export function mapPlayerData(rawData: rawPlayerData) {
             last_name: rawData.lastName,
             number: rawData.primaryNumber,
             position: rawData.primaryPosition.abbreviation,
-            position_category: rawData.primaryPosition.type,
+            positionCategory: rawData.primaryPosition.type,
             batting_hand: rawData.batSide.code,
             throwing_hand: rawData.pitchHand.code,
             height: rawData.height,
