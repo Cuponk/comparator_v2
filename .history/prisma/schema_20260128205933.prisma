@@ -27,7 +27,7 @@ model player {
   weight             Int
   birth_date         String
   birth_city         String
-  birth_state        String?              @default("")
+  birth_state        String?
   birth_country      String
   debut_date         String
   final_game_date    String?

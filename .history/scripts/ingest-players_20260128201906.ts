@@ -1,13 +1,10 @@
 import "dotenv/config";
 import { getMappedPlayer, upsertPlayer } from "../app/lib/mappers";
-import { PrismaBetterSqlite3 } from "@prisma/adapter-better-sqlite3";
 import { PrismaClient } from "../app/generated/prisma/client";
 
-const adapter = new PrismaBetterSqlite3({
-  url: "file:./prisma/dev.db"
-})
-const prisma = new PrismaClient({ adapter })
-
+const prisma = new PrismaClient({
+    log: ["query", "info", "warn", "error"],
+});
 
 
 async function ingestPlayers(playerIds: number[]) {
