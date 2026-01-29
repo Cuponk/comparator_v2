@@ -2,15 +2,6 @@ import "dotenv/config";
 import { getMappedPlayer, upsertPlayer } from "../app/lib/mappers";
 import { PrismaClient } from "../app/generated/prisma/client";
 
-const prisma = new PrismaClient({
-    datasources: {
-        db: {
-            url: process.env.DATABASE_URL || "file:./dev.db",
-        },
-    },
-});
-
-
 async function ingestPlayers(playerIds: number[]) {
 
     console.log("starting ingestion")
@@ -30,6 +21,4 @@ async function ingestPlayers(playerIds: number[]) {
 
 const playerIdsToIngest = [592450, 660271]; // Example player IDs (Judge and Ohtani)
 
-ingestPlayers(playerIdsToIngest).finally(async () => {
-    await prisma.$disconnect();
-});
+ingestPlayers(playerIdsToIngest)
