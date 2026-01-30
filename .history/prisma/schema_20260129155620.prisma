@@ -24,13 +24,13 @@ model player {
   batting_hand       String
   throwing_hand      String
   height             String
-  weight             Int?              @default(0)
+  weight             Int?
   birth_date         String
   birth_city         String
   birth_state        String?              @default("")
   birth_country      String
   debut_date         String
-  final_game_date    String?              @default("")
+  final_game_date    String?
   active             Boolean
   created_at         DateTime             @default(now())
   updated_at         DateTime             @updatedAt

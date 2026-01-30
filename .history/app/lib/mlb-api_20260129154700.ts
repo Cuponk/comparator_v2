@@ -46,7 +46,8 @@ export async function fetchPlayers() {
     }
 }
 
-export const getAllPlayerIds = async () => {
-    const players = await fetchPlayers();
-    return players.map((player: any) => player.id);
-};
+fetchPlayers().then(players => {
+    console.log(players.map((p: any) => p.full_name));
+}).catch(error => {
+    console.error("Error fetching players:", error);
+});
