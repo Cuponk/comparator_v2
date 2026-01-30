@@ -28,9 +28,8 @@ const page = () => {
                 <h2 className="text-xl font-bold mb-2">Player Details</h2>
                 <p><strong>ID:</strong> {player.id}</p>
                 <p><strong>Name:</strong> {player.full_name}</p>
-                <p><strong>Position:</strong> {player.position}</p>
+                <p><strong>Team:</strong> {player.position}</p>
                 {/* Add more player fields as necessary */}
-                
             </div>
         );
     }
@@ -52,9 +51,7 @@ const page = () => {
                 <ul>
                     {search.map((player: any) => (
                         <li key={player.id}>
-                            <button className="text-blue-400 underline" onClick={() => fetchPlayer(player.id)}>
                             {player.full_name} - {player.position}
-                            </button>
                         </li>
                     ))}
                 </ul>
@@ -65,7 +62,7 @@ const page = () => {
     return( 
     <div className="flex flex-col items-center justify-center min-h-screen bg-gray-900 text-white space-y-4">  
         Player Page
-        <input type="text" placeholder="Player Name" className="px-4 py-2 rounded bg-gray-800 border border-gray-700 text-white" value={term} onChange={(e) => setTerm(e.target.value)} />
+        <input type="text" placeholder="Player ID" className="px-4 py-2 rounded bg-gray-800 border border-gray-700 text-white" value={term} onChange={(e) => setTerm(e.target.value)} />
         <button className="bg-white text-black px-4 py-2 rounded" onClick={() => searchPlayer(term)}>
             Get Players
         </button>

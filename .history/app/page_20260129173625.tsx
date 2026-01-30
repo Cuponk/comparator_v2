@@ -30,7 +30,6 @@ const page = () => {
                 <p><strong>Name:</strong> {player.full_name}</p>
                 <p><strong>Position:</strong> {player.position}</p>
                 {/* Add more player fields as necessary */}
-                
             </div>
         );
     }
